@@ -60,9 +60,15 @@ public class ExpenseService {
         return Optional.ofNullable(mongoTemplate.findById(username, Expense.class));
     }
 
-//    @KafkaListener(topics = "user-creation")
-//    public void listen(String username) {
-//        mongoTemplate.createCollection(username);
-//    }
+    @KafkaListener(topics = "user-creation", groupId = "expense-service-group")
+    public void listen(String username) {
+        System.out.printf(username);
+        Expense userExpense = mongoTemplate.findById(username, Expense.class);
+        if (userExpense == null) {
+            userExpense = new Expense();
+            userExpense.setUsername(username);
+        }
+        mongoTemplate.save(userExpense);
+    }
 
 }
