@@ -2,7 +2,6 @@ package com.example.expenseservice.controller;
 
 import com.example.expenseservice.entity.Expense;
 import com.example.expenseservice.service.ExpenseService;
-import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/expenses")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ExpenseController {
 
     @Autowired
